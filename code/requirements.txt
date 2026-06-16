@@ -1,0 +1,13 @@
+pandas
+numpy
+scipy
+scikit-learn
+lightgbm
+joblib
+pandera
+fastapi
+uvicorn
+streamlit
+requests
+plotly
+mlflow
