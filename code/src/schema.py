@@ -1,4 +1,4 @@
-import pandera as pa
+import pandera.pandas as pa
 from pandera.typing import Series
 from pydantic import BaseModel, Field
 
@@ -17,3 +17,16 @@ class InputSchema(pa.DataFrameModel):
 
     class Config:
         strict = True
+
+# ===== 2. Frontend request validation (only 4 fields, project.md 6.1) =====
+class PredictRequest(BaseModel):
+    user_id: str = Field(..., description="User ID")
+    video_id: str = Field(..., description="Video ID")
+    watch_time_seconds: float = Field(..., ge=0, description="Watch time in seconds, must be >= 0")
+    hour_of_day: int = Field(..., ge=0, le=23, description="Hour of day, 0-23")
+
+# ===== 3. Response returned to frontend (project.md 8.1) =====
+class PredictResponse(BaseModel):
+    prediction: int = Field(..., description="Liked or not: 0/1")
+    probability: float = Field(..., description="Like probability, 0-1")
+    confidence: str = Field(..., description="Confidence level: High/Medium/Low")
