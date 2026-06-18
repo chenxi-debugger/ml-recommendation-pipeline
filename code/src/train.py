@@ -50,30 +50,30 @@ def train_and_select_best_model():
         "Logistic_Regression": {
             "model": LogisticRegression(max_iter=1000, random_state=42, class_weight="balanced"),
             "params": {
-                "C": [0.1, 1.0, 10.0],
+                "C": [0.01, 0.1, 1.0, 10.0, 100.0],
             },
         },
         "Random_Forest": {
             "model": RandomForestClassifier(random_state=42, n_jobs=-1, class_weight="balanced"),
             "params": {
-                "n_estimators": [100, 200],
-                "max_depth": [8, 12, 20],
+                "n_estimators": [100, 200, 300],
+                "max_depth": [4, 6, 8, 12, 20],
             },
         },
         "Gradient_Boosting": {
             "model": GradientBoostingClassifier(random_state=42),
             "params": {
-                "n_estimators": [50, 100],
+                "n_estimators": [100, 200],
                 "learning_rate": [0.05, 0.1],
-                "max_depth": [3, 5],
+                "max_depth": [3, 5, 7],
             },
         },
         "LightGBM": {
             "model": LGBMClassifier(random_state=42, n_jobs=-1, verbose=-1, class_weight="balanced"),
             "params": {
-                "n_estimators": [100, 200],
+                "n_estimators": [100, 200, 300],
                 "learning_rate": [0.05, 0.1],
-                "num_leaves": [31, 63],
+                "num_leaves": [15, 31, 63],
             },
         },
     }
