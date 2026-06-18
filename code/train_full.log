@@ -1,0 +1,6 @@
+Train size: (400000, 10), Test size: (100000, 10)
+Training Logistic_Regression ...
+2026/06/18 11:37:31 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+2026/06/18 11:37:31 WARNING mlflow.sklearn: Saving scikit-learn models in the pickle or cloudpickle format requires exercising caution because these formats rely on Python's object serialization mechanism, which can execute arbitrary code during deserialization. The recommended safe alternative is the 'skops' format. For more information, see: https://scikit-learn.org/stable/model_persistence.html
+2026/06/18 11:39:23 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+2026/06/18 11:39:23 WARNING mlflow.sklearn: Saving scikit-learn models in the pickle or cloudpickle format requires exercising caution because these formats rely on Python's object serialization mechanism, which can execute arbitrary code during deserialization. The recommended safe alternative is the 'skops' format. For more information, see: https://scikit-learn.org/stable/model_persistence.html
