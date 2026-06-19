@@ -76,6 +76,44 @@ def build_features(req: PredictRequest) -> pd.DataFrame:
     df = pd.DataFrame([row])[feature_store["feature_columns"]]
     return df
 
+@app.post("/predict", response_model=PredictResponse)
+def predict(request: PredictRequest):
+    # Pydantic already validated hour_of_day (0-23) and watch_time_seconds (>=0)
+    if best_model is None or feature_store is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+
+    # 1. Derive the 10 model features
+    df = build_features(request)
+
+    # 2. Validate the feature DataFrame with the schema 
+    try:
+        InputSchema.validate(df)
+    except pa.errors.SchemaError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # 3. Predict
+    try:
+        proba = best_model.predict_proba(df)[0]      # [P(no like), P(like)] for the single sample
+        probability = float(proba[1])                # take P(like), the class-1 probability
+        prediction = int(probability >= 0.5)         # 1 if like probability >= 0.5, else 0
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    # 4. Confidence level (project.md 8.2)
+    if probability >= 0.8:
+        confidence = "High"
+    elif probability >= 0.5:
+        confidence = "Medium"
+    else:
+        confidence = "Low"
+
+    return {
+        "prediction": prediction,
+        "probability": probability,
+        "confidence": confidence,
+    }
+
+
 
 
 if __name__ == "__main__":
