@@ -36,7 +36,7 @@ def train_and_select_best_model():
     X = df[FEATURE_COLUMNS]
     y = df[LABEL_COLUMN]
 
-    # ---- Validate features with the schema (the "gatekeeper") ----
+    # ---- Validate features with the schema ----
     InputSchema.validate(X)
 
     # ---- Train/test split (project.md 5.3) ----
