@@ -2,7 +2,7 @@
 
 An end-to-end machine learning system that predicts whether a user will **like** a short video. The project covers the full ML lifecycle: data engineering, user embeddings, multi-model training with hyperparameter tuning, experiment tracking, a REST inference API, and an interactive web UI.
 
-> **Repository:** `ml-recommendation-pipeline`
+> **Repository:** `ml-recommendation-pipeline` 
 > **Stack:** Python · pandas · scikit-learn · LightGBM · TruncatedSVD · Pandera · Pydantic · FastAPI · Streamlit · Plotly · MLflow
 
 ---
