@@ -87,6 +87,9 @@ cognitive_shorts/
 
 ## Quick Start
 
+> **Note:** The raw data files (`interactions.csv`, `users.csv`, `videos.csv`) are not included in the repository (gitignored due to size). Place the three raw CSVs in `code/data/` before running step 2.
+
+
 ```bash
 # 1. Environment
 cd code
