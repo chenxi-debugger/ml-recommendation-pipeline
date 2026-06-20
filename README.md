@@ -24,6 +24,13 @@ Key capabilities:
 
 ---
 
+## Demo
+
+![Single Prediction UI](docs/screenshot.png)
+
+*The Streamlit frontend: enter a user/video, get a like-probability gauge, confidence level, and inference latency in real time.*
+
+
 ## Architecture
 
 ```
