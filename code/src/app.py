@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import requests
 import time
@@ -18,7 +19,7 @@ if "start_time" not in st.session_state:
 
 # Backend API base URL (globally available)
 if "api_url" not in st.session_state:
-    st.session_state.api_url = "http://127.0.0.1:8000"
+    st.session_state.api_url = os.environ.get("API_URL", "http://127.0.0.1:8000")
 
 # Current page (for button navigation)
 if "current_page" not in st.session_state:
