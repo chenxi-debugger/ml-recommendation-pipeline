@@ -38,9 +38,9 @@ def call_api(endpoint, method="GET", payload=None):
 
     try:
         if method == "POST":
-            response = requests.post(url, json=payload, timeout=10)
+            response = requests.post(url, json=payload, timeout=180)
         else:
-            response = requests.get(url, timeout=5)
+            response = requests.get(url, timeout=180)
 
         if response.status_code == 200:
             return response.json(), None
@@ -73,7 +73,8 @@ def render_sidebar():
 
         # API status
         st.subheader("API Status")
-        data, err = call_api('health')
+        with st.spinner("Waking up the backend (free hosting, may take 2–3 minutes)..."):
+            data, err = call_api('health')
         if data and data.get('status') == 'healthy':
             st.success("✅ Healthy")
         else:
