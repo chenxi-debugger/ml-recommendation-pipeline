@@ -1,4 +1,5 @@
 # Cognitive Shorts — Short-Video Like Prediction Pipeline
+**🔗 Live Demo:** https://cognitive-shorts-app.onrender.com *(free tier — first load may take 1–2 minutes)*
 
 An end-to-end machine learning system that predicts whether a user will **like** a short video. The project covers the full ML lifecycle: data engineering, user embeddings, multi-model training with hyperparameter tuning, experiment tracking, a REST inference API, and an interactive web UI.
 
