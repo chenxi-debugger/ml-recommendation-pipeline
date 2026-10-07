@@ -52,6 +52,21 @@ def call_api(endpoint, method="GET", payload=None):
 
     except Exception as e:
         return None, f"Error: {str(e)}"
+
+def wait_for_backend(max_wait=180):
+    """Keep checking /health every 5 seconds until the backend wakes up.
+
+    Free hosting puts the backend to sleep after inactivity,
+    so a single check is not enough.
+    """
+    start = time.time()
+    data, err = None, None
+    while time.time() - start < max_wait:
+        data, err = call_api('health')
+        if data and data.get('status') == 'healthy':
+            return data, None
+        time.sleep(5)
+    return data, err
     
 # ====================== 4. Sidebar ======================
 def render_sidebar():
@@ -73,12 +88,17 @@ def render_sidebar():
 
         # API status
         st.subheader("API Status")
+        # Let the visitor's browser ping the backend too (a browser request can wake it up)
+        st.markdown(
+            f'<img src="{st.session_state.api_url}/health" style="display:none">',
+            unsafe_allow_html=True,
+        )
         with st.spinner("Waking up the backend (free hosting, may take 2–3 minutes)..."):
-            data, err = call_api('health')
+            data, err = wait_for_backend()
         if data and data.get('status') == 'healthy':
             st.success("✅ Healthy")
         else:
-            st.error("❌ Offline")
+            st.error(f"❌ Offline: {err}")
         
         # Show uptime
         st.subheader("Uptime")
